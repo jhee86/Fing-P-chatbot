@@ -13,6 +13,9 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  
 }
 
 .logo {
@@ -29,14 +32,22 @@
 .add-question,
 .sign-out {
   width: 100%;
+  height: 40px;
   padding: 10px;
   margin: 10px 0;
   border: none;
-  background-color: #5a8f68;
   color: white;
   cursor: pointer;
+  box-shadow: #0e0f0e;
+  border-radius: 5px;
 }
+.add-question{
+  background-color: #0d3f1a;
 
+}
+.sign-out {
+  background-color: #9b9b9b;
+}
 .add-question:hover,
 .sign-out:hover {
   background-color: #466b51;

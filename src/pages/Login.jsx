@@ -1,8 +1,17 @@
 import React from "react";
-import "./Auth.css";
-//import logo from ; // 로고 이미지를 import
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import "./css/Auth.css";
 
 const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    login();
+    navigate("/");
+  };
+
   return (
     <div className="auth-container">
       <h2>Fing-P CHATBOT</h2>
@@ -15,7 +24,9 @@ const Login = () => {
           <label htmlFor="pw">PW</label>
           <input type="password" id="pw" name="pw" required />
         </div>
-        <button type="submit">LOGIN</button>
+        <button type="submit" onClick={handleLogin}>
+          LOGIN
+        </button>
       </form>
       <div className="signup-link">
         <a href="/signup">회원가입하기</a>

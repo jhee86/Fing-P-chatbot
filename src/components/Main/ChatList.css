@@ -1,0 +1,22 @@
+.chat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #466b51;
+}
+
+.chat-name {
+  font-size: 14px;
+}
+
+.chat-mode {
+  font-size: 14px;
+}
+
+.chat-mode.live {
+  color: red;
+}
+
+.chat-mode.faq {
+  color: blue;
+}

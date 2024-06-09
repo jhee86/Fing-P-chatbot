@@ -26,21 +26,23 @@ const InputBar = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState(""); // Use the useState hook
 
   const handleInputChange = (event) => {
-    // console.log("inputValue: ", event.target.value);
+    console.log("inputValue: ", event.target.value);
     setInputValue(event.target.value);
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
+      event.preventDefault();
       handleSubmit();
     }
   };
 
-  const handleSubmit = (text) => {
-    // console.log("inputValue: ", inputValue);
+  const handleSubmit = () => {
+    console.log("inputValue: ", inputValue);
     if (onSubmit) {
       onSubmit(inputValue);
     }
+
     setInputValue("");
   };
 

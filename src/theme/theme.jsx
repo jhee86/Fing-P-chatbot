@@ -1,9 +1,11 @@
 import { createTheme } from "@mui/system";
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: "#2A7236",
     },
   },
 });
+
+export const drawerWidth = 320;

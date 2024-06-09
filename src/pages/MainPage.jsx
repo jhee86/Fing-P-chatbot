@@ -5,6 +5,7 @@ import InputBar from "../components/InputBar/InputBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { drawerWidth } from "../theme/theme";
+import Chat from "../components/Chat/Chat";
 
 const MainPage = () => {
   return (
@@ -16,6 +17,8 @@ const MainPage = () => {
         <ChatSessionButton title="Chat 2" />
         <ChatSessionButton title="Chat 3" />
       </SideBar>
+
+      <Chat />
 
       {/* Add padding at the bottom to avoid overlap */}
       <Box sx={{ pb: "40px" }} />

@@ -32,7 +32,7 @@ const Login = () => {
         <a href="/signup">회원가입하기</a>
       </div>
       <div className="logo-container">
-        <img src="/assets/pngegg (1).png" alt="skku logo" />
+        <img src="/assets/skku-logo.png" alt="skku logo" />
       </div>
     </div>
   );

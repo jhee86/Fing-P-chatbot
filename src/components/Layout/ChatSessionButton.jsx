@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -7,23 +8,59 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Typography, Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import DropDown from "../Dropdown/Dropdown";
 
-const ChatSessionButton = ({ title, mode, focused }) => {
+const ChatSessionButton = ({ title, mode, isFocused, onClick }) => {
   const subtitle = mode === "live" ? "Live mode" : "FAQ mode";
   const modeColor = mode === "live" ? "#FF5353" : "#5AA7EE";
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const items = [
+    {
+      id: "rename",
+      text: "Rename",
+      onClick: () => console.log("Rename clicked"),
+    },
+    {
+      id: "remove",
+      text: "Remove",
+      onClick: () => console.log("Remove clicked"),
+    },
+  ];
 
   return (
     <ListItem
       disablePadding
       secondaryAction={
-        <IconButton aria-label="more" sx={{ height: "fit-content" }}>
-          <MoreHorizIcon sx={{ color: grey[50] }} />
-        </IconButton>
+        <>
+          <IconButton
+            aria-label="more"
+            sx={{ height: "fit-content" }}
+            onClick={handleMenuClick}
+          >
+            <MoreHorizIcon sx={{ color: grey[50] }} />
+          </IconButton>
+          <DropDown
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+            items={items}
+          />
+        </>
       }
       sx={{
         borderRadius: "10px",
         marginBottom: "8px",
-        bgcolor: focused ? "#ADBC9F" : null,
+        bgcolor: isFocused ? "#ADBC9F" : null,
         "&:hover": {
           bgcolor: "#A9B49A",
         },
@@ -32,6 +69,7 @@ const ChatSessionButton = ({ title, mode, focused }) => {
       <ListItemButton
         disableRipple
         sx={{ width: "100%", borderRadius: "10px" }}
+        onClick={onClick}
       >
         <ListItemIcon>
           <ChatBubbleIcon sx={{ color: grey[50] }} />

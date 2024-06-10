@@ -1,41 +1,38 @@
-// import { Route, Routes } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import ChatSessionButton from "./ChatSessionButton";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-// import Chat from "../components/Chat/Chat";
+import { useChatList } from "../../hooks/useChatList";
+import useChatSession from "../../hooks/useChatSession";
 
 const Layout = (props) => {
   const [focused, setFocused] = useState(null);
+  const { chatSessions } = useChatList();
+  useChatSession(focused);
 
-  const handleClickChatSession = (title) => {
-    setFocused(title);
+  const handleClickChatSession = (sessionId) => {
+    // sessionId를 사용하여 현재 세션을 찾습니다.
+    const session = chatSessions.find((session) => session.id === sessionId);
+    if (session) {
+      setFocused(session.id);
+    }
   };
-
-  const chatSessions = [
-    { title: "Chat 1", mode: "live" },
-    { title: "Chat 2", mode: "live" },
-    { title: "Chat 3", mode: "FAQ" },
-  ];
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
       <SideBar>
-        {chatSessions.map((session, index) => (
+        {chatSessions.map((session) => (
           <ChatSessionButton
-            key={index}
+            key={session.id}
             title={session.title}
             mode={session.mode}
-            isFocused={focused === session.title}
-            onClick={() => handleClickChatSession(session.title)}
+            isFocused={focused === session.id}
+            onClick={() => handleClickChatSession(session.id)}
           />
         ))}
-        {/* <ChatSessionButton title="Chat 1" mode="live" isFocused={true} />
-        <ChatSessionButton title="Chat 2" mode="live" />
-        <ChatSessionButton title="Chat 3" mode="FAQ" /> */}
       </SideBar>
 
       {props.children}

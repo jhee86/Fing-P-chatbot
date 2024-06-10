@@ -7,7 +7,7 @@ const useChatSession = (sessionId) => {
   useEffect(() => {
     const fetchChatSession = async () => {
       try {
-        const response = await fetch(`/api/chat-sessions/${sessionId}`);
+        const response = await fetch(`/chatbot/chatting/${sessionId}`);
         const data = await response.json();
 
         dispatch({

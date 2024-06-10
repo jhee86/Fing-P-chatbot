@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
 // 인증 상태를 관리하기 위한 Context 생성
 export const AuthContext = createContext();
@@ -15,4 +15,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-

@@ -24,16 +24,23 @@ const ChatSessionButton = ({ title, mode, isFocused, onClick }) => {
     setAnchorEl(null);
   };
 
+  const renameClicked = () => {
+    console.log("Rename clicked");
+  };
+  const removeClicked = () => {
+    console.log("Remove clicked");
+  };
+
   const items = [
     {
       id: "rename",
       text: "Rename",
-      onClick: () => console.log("Rename clicked"),
+      onClick: () => renameClicked(),
     },
     {
       id: "remove",
       text: "Remove",
-      onClick: () => console.log("Remove clicked"),
+      onClick: () => removeClicked(),
     },
   ];
 

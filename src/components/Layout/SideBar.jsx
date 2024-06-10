@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -7,8 +7,33 @@ import Logo from "../Logo/Logo";
 import AddIcon from "@mui/icons-material/Add";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { drawerWidth } from "../../theme/theme";
+import DropDown from "../Dropdown/Dropdown";
+import { bgcolor } from "@mui/system";
 
 export default function SideBar(props) {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const onClickAddQuestion = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const DropdownItems = [
+    {
+      id: "live",
+      text: "Live Mode",
+      onClick: () => console.log("Live Mode"),
+    },
+    {
+      id: "faq",
+      text: "FAQ Mode",
+      onClick: () => console.log("Live Mode"),
+    },
+  ];
+
   return (
     <Box
       component="nav"
@@ -29,8 +54,6 @@ export default function SideBar(props) {
             padding: "20px",
             borderTopRightRadius: "30px",
             borderBottomRightRadius: "30px",
-            // flexDirection: "column",
-            // justifyContent: "space-between",
           },
         }}
         open
@@ -38,16 +61,6 @@ export default function SideBar(props) {
         <Logo />
         <Box sx={{ marginTop: "64px" }}>{/* margein */}</Box>
 
-        {/* {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))} */}
         <List sx={{ flexGrow: 1 }}>{props.children}</List>
 
         <Box
@@ -60,11 +73,22 @@ export default function SideBar(props) {
         >
           <Button
             startIcon={<AddIcon />}
-            sx={{ width: "100%", marginBottom: "10px" }}
+            sx={{ width: "100%", marginBottom: "10px", bgcolor: "#294B29" }}
+            onClick={onClickAddQuestion}
           >
-            Add Question 1
+            Add Question
           </Button>
-          <Button startIcon={<LogoutIcon />} sx={{ width: "100%" }}>
+          <DropDown
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+            items={DropdownItems}
+          />
+
+          <Button
+            startIcon={<LogoutIcon />}
+            sx={{ width: "100%", bgcolor: "#777777" }}
+          >
             Sign Out
           </Button>
         </Box>

@@ -29,7 +29,27 @@ export const useChatList = () => {
     fetchChatList();
   }, []); // 빈 의존성 배열을 전달하여 컴포넌트 마운트 시에만 호출되도록 함
 
+  const renameChatSession = (sessionId, newTitle) => {
+    // 백엔드 API 호출
+    setChatSessions((currentSessions) =>
+      currentSessions.map((session) =>
+        session.id === sessionId ? { ...session, title: newTitle } : session
+      )
+    );
+  };
+
+  const removeChatSession = (sessionId) => {
+    // 백엔드 호출
+    setChatSessions((currentSessions) =>
+      currentSessions.map((session) =>
+        currentSessions.filter((session) => session.id !== sessionId)
+      )
+    );
+  };
+
   return {
     chatSessions,
+    renameChatSession,
+    removeChatSession,
   };
 };

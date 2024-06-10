@@ -9,12 +9,20 @@ const useChatSession = (sessionId) => {
       try {
         const response = await fetch(`/chatbot/chatting/${sessionId}`);
         const data = await response.json();
+        const parsedMessages = data.map((message) => ({
+          id: message.id,
+          question: message.question,
+          answer: message.answer,
+          createdAt: message.createdAt,
+          myFeedback: message.myFeedback,
+          source: Object.values(message.source), // 객체의 값들을 배열로 변환
+        }));
 
         dispatch({
           type: "SET_SESSION",
           payload: {
             session: sessionId,
-            messages: data.messages,
+            messages: data.parsedMessages,
           },
         });
       } catch (error) {
